@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@android:style/Theme.NoTitleBar"
+    tools:context="com.codepath.apps.mysimpletweets.ComposeActivity">
+
+
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/ivCancel"
+        android:src="@drawable/ic_cancel"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onCancel" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/ivProfileImageCompose"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:id="@+id/etComposeTweetBody"
+        android:layout_below="@+id/ivProfileImageCompose"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:hint="@string/compose_hint"
+        android:background="@android:color/transparent"
+        android:layout_alignRight="@+id/ivProfileImageCompose"
+        android:layout_alignEnd="@+id/ivProfileImageCompose" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/medGray"
+            android:text="@string/characterCount"
+            android:id="@+id/tvCharacterCount"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tweet"
+            android:minHeight="36dp"
+            android:minWidth="56dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/twitterBlue"
+            android:textAllCaps="false"
+            android:id="@+id/btnTweet"
+            android:onClick="onTweet" />
+    </LinearLayout>
+
+</RelativeLayout>

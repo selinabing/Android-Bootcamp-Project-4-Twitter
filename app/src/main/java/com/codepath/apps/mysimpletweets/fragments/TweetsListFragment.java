@@ -17,14 +17,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by selinabing on 6/28/16.
  */
 public class TweetsListFragment extends Fragment {
     // inflation logic
-    private Unbinder unbinder;
     private ArrayList<Tweet> tweets;
     private TweetsArrayAdapter adapterTweets;
     @BindView(R.id.lvTweets)
@@ -34,7 +32,7 @@ public class TweetsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tweets_list, container, false);
-        unbinder = ButterKnife.bind(this,view);
+        ButterKnife.bind(this,view);
         lvTweets.setAdapter(adapterTweets);
         return view;
     }
@@ -49,13 +47,16 @@ public class TweetsListFragment extends Fragment {
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
-
     public void addAll(List<Tweet> tweets) {
         adapterTweets.addAll(tweets);
     }
+
+    public void clear() { adapterTweets.clear(); }
+
+    public void add (int index, Tweet tweet) {
+        adapterTweets.insert(tweet,index);
+    }
+
+    public void scrollToTop () { lvTweets.setSelection(0); }
+
 }
