@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +14,8 @@ import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.mysimpletweets.fragments.HomeTimelineFragment;
 import com.codepath.apps.mysimpletweets.fragments.MentionsTimelineFragment;
 import com.codepath.apps.mysimpletweets.models.Tweet;
+
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,6 +71,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     public class TweetsPagerAdapter extends SmartFragmentStatePagerAdapter {
         final int PAGE_COUNT = 2;
+        //private int tabIcons[] = {R.drawable}
         private String tabTitles[] = {"Home","Mentions"};
 
         public TweetsPagerAdapter(FragmentManager fragmentManager){
@@ -105,8 +107,7 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-            Tweet tweet = (Tweet) data.getExtras().getSerializable("tweet");
-            Log.d("DEBUG","tweet here");
+            Tweet tweet = (Tweet) Parcels.unwrap(data.getParcelableExtra("tweet"));
             homeTimelineFragment.appendTweet(tweet);
             homeTimelineFragment.scrollToTop();
         }

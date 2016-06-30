@@ -5,8 +5,8 @@ import android.text.format.DateUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
-import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,7 +15,8 @@ import java.util.Locale;
 /**
  * Created by selinabing on 6/27/16.
  */
-public class Tweet implements Serializable {
+@Parcel
+public class Tweet {
     public String getBody() {
         return body;
     }
@@ -36,21 +37,11 @@ public class Tweet implements Serializable {
         return relativeTimestamp;
     }
 
-    public void setBody(String body) {
-        this.body = body;
-    }
+    public boolean isFavorited() { return favorited; }
 
-    public void setUid(long uid) {
-        this.uid = uid;
-    }
+    public int getRetweetCount() { return retweetCount; }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
+    public int getFavoriteCount() { return favoriteCount; }
 
     /**
      *
@@ -61,6 +52,10 @@ public class Tweet implements Serializable {
     private User user;
     private String createdAt;
     private String relativeTimestamp;
+    private boolean favorited;
+    private int retweetCount;
+    private int favoriteCount;
+
 
     // Deserialize JSON
     public static Tweet fromJSON(JSONObject jsonObject){
@@ -71,6 +66,9 @@ public class Tweet implements Serializable {
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
             tweet.relativeTimestamp = tweet.getRelativeTimeAgo(tweet.getCreatedAt());
+            tweet.favorited = jsonObject.getBoolean("favorited");
+            tweet.retweetCount = jsonObject.getInt("retweet_count");
+            tweet.favoriteCount = jsonObject.getInt("favorite_count");
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -19,6 +19,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -102,7 +103,7 @@ public class ComposeActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Tweet tweet = Tweet.fromJSON(response);
                 Intent data = new Intent();
-                data.putExtra("tweet",tweet);
+                data.putExtra("tweet", Parcels.wrap(tweet));
                 setResult(RESULT_OK, data);
                 finish();
             }

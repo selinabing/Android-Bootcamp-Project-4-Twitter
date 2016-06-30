@@ -2,4 +2,5 @@
 <resources>
     <color name="medGray">#ccd6dd</color>
     <color name="twitterBlue">#55acee</color>
+    <color name="darkGray">#66757f</color>
 </resources>

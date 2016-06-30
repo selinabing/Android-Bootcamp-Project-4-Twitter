@@ -2,13 +2,13 @@ package com.codepath.apps.mysimpletweets.models;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.Serializable;
+import org.parceler.Parcel;
 
 /**
  * Created by selinabing on 6/27/16.
  */
-public class User implements Serializable {
+@Parcel
+public class User {
     public String getName() {
         return name;
     }

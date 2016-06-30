@@ -14,6 +14,8 @@ import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.codepath.apps.mysimpletweets.models.User;
 import com.squareup.picasso.Picasso;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,6 +35,9 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         TextView tvBody;
         @BindView(R.id.tvUsername) TextView tvUsername;
         @BindView(R.id.tvRelativeTime) TextView tvRelativeTime;
+        @BindView(R.id.tvNumLikes) TextView tvNumLikes;
+        @BindView(R.id.tvNumTweets) TextView tvNumTweets;
+        @BindView(R.id.ivHeartIcon) ImageView ivHeartIcon;
 
         public ViewHolder(View itemView) {
             ButterKnife.bind(this,itemView);
@@ -65,6 +70,21 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         viewHolder.tvRelativeTime.setText(tweet.getRelativeTimestamp());
         viewHolder.ivProfileImage.setImageResource(0);
         Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).transform(new RoundedCornersTransformation(5,5)).into(viewHolder.ivProfileImage);
+        if(tweet.getFavoriteCount()>0) {
+            viewHolder.tvNumLikes.setText("" + tweet.getFavoriteCount());
+        } else {
+            viewHolder.tvNumLikes.setText("");
+        }
+        if(tweet.getRetweetCount()>0) {
+            viewHolder.tvNumTweets.setText("" + tweet.getRetweetCount());
+        } else {
+            viewHolder.tvNumTweets.setText("");
+        }
+        if(tweet.isFavorited()) {
+            Picasso.with(getContext()).load(R.drawable.ic_heart_red).into(viewHolder.ivHeartIcon);
+        } else {
+            Picasso.with(getContext()).load(R.drawable.ic_heart_gray).into(viewHolder.ivHeartIcon);
+        }
 
         final User user = tweet.getUser();
 
@@ -75,10 +95,19 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
             public void onClick(View v) {
                 Intent i = new Intent(finalConvertView.getContext(),ProfileActivity.class);
                 i.putExtra("screen_name",viewHolder.ivProfileImage.getTag().toString());
-                i.putExtra("user",user);
+                i.putExtra("user", Parcels.wrap(user));
                 finalConvertView.getContext().startActivity(i);
             }
         });
+
+        viewHolder.ivProfileImage.setTag(tweet.getUser().getScreenName());
+        viewHolder.ivHeartIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
         return convertView;
     }

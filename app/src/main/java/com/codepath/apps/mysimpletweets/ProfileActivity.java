@@ -12,6 +12,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 //user = User.fromJSON(response);
-                user = (User) getIntent().getSerializableExtra("user");
+                user = (User) Parcels.unwrap(getIntent().getParcelableExtra("user"));
                 getSupportActionBar().setTitle("@"+user.getScreenName());
                 populateProfileHeader(user);
             }
