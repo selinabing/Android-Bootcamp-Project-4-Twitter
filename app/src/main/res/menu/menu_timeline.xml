@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.codepath.apps.mysimpletweets.TimelineActivity">
 
+    <!--
     <item
         android:id="@+id/miProfile"
         app:showAsAction="ifRoom"
@@ -10,5 +11,19 @@
         android:title="Profile"
         android:onClick="onProfileView" >
     </item>
+    -->
+
+    <item android:id="@+id/profile_bar"
+        android:title="Filter"
+        android:icon="@drawable/ic_bar_lists"
+        android:onClick="onProfileView"
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item android:id="@+id/action_search"
+        android:orderInCategory="5"
+        android:title="Search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="ifRoom"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
 
 </menu>

@@ -9,18 +9,17 @@ import com.codepath.apps.mysimpletweets.TwitterClient;
 import com.codepath.apps.mysimpletweets.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
-import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by selinabing on 6/28/16.
+ * Created by selinabing on 6/30/16.
  */
-public class UserTimelineFragment extends TweetsListFragment {
+public class SearchTweetsFragment extends TweetsListFragment {
 
     private TwitterClient client;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,24 +28,30 @@ public class UserTimelineFragment extends TweetsListFragment {
         populateTimeLine();
     }
 
-    public static UserTimelineFragment newInstance(String screenName) {
-        UserTimelineFragment userTimelineFragment = new UserTimelineFragment();
+    public static SearchTweetsFragment newInstance(String query) {
+        SearchTweetsFragment searchTweetsFragment = new SearchTweetsFragment();
         Bundle args = new Bundle();
-        args.putString("screen_name", screenName);
-        userTimelineFragment.setArguments(args);
-        return userTimelineFragment;
+        args.putString("query", query);
+        searchTweetsFragment.setArguments(args);
+        return searchTweetsFragment;
     }
 
     // send API request to get timeline json
     // fill listview by creating tweet object from json
     private void populateTimeLine() {
-        String screenName = getArguments().getString("screen_name");
-        client.getUserTimeline(screenName, new JsonHttpResponseHandler() {
+        String query = getArguments().getString("query");
+        Log.d("DEBUG","query is [[["+query);
+        client.getSearch(query, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
-                Log.d("DEBUG", json.toString());
+            public void onSuccess(int statusCode, Header[] headers, JSONObject json) {
+                Log.d("DEBUG", "search -> "+json.toString());
                 clear();
-                addAll(Tweet.fromJSONArray(json));
+                try {
+                    addAll(Tweet.fromJSONArray(json.getJSONArray("statuses")));
+                } catch(JSONException e) {
+                    Log.d("DEBUG","lifesad");
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -55,5 +60,5 @@ public class UserTimelineFragment extends TweetsListFragment {
             }
         });
     }
-}
 
+}

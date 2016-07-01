@@ -1,16 +1,21 @@
 package com.codepath.apps.mysimpletweets.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.codepath.apps.mysimpletweets.DetailedTweetActivity;
 import com.codepath.apps.mysimpletweets.R;
 import com.codepath.apps.mysimpletweets.TweetsArrayAdapter;
 import com.codepath.apps.mysimpletweets.models.Tweet;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,15 @@ public class TweetsListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tweets_list, container, false);
         ButterKnife.bind(this,view);
         lvTweets.setAdapter(adapterTweets);
+        lvTweets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getActivity(), DetailedTweetActivity.class);
+                Tweet tweet = (Tweet) lvTweets.getItemAtPosition(position);
+                i.putExtra("tweet", Parcels.wrap(tweet));
+                getActivity().startActivity(i);
+            }
+        });
         return view;
     }
 

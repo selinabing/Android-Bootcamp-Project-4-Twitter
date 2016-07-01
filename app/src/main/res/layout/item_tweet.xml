@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent" android:layout_height="match_parent"
-        android:padding="10dp">
+        android:layout_width="match_parent" android:layout_height="match_parent" android:padding="5dp">
 
         <ImageView
             android:layout_width="60dp"
@@ -22,8 +21,7 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/ivProfileImage"
             android:layout_toEndOf="@+id/ivProfileImage"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -62,17 +60,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvBody"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="22dp">
+        android:layout_toRightOf="@id/ivProfileImage"
+        android:layout_marginTop="10dp">
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:id="@+id/ivReplyIcon"
             android:src="@drawable/ic_reply"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="65dp"/>
+            android:layout_marginRight="48dp"/>
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -85,8 +81,8 @@
             android:id="@+id/tvNumTweets"
             android:textColor="@color/darkGray"
             android:text="5"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="56dp" />
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="38dp" />
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -99,8 +95,8 @@
             android:id="@+id/tvNumLikes"
             android:textColor="@color/darkGray"
             android:text="3"
-            android:layout_marginTop="2dp"
-            android:layout_marginRight="56dp" />
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="38dp" />
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"

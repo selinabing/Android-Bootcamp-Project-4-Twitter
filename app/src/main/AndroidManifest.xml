@@ -10,7 +10,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -49,9 +48,11 @@
         </activity>
         <activity android:name=".TimelineActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".ComposeActivity"
-            android:windowSoftInputMode="adjustPan|adjustResize">
-        </activity>
+        <activity
+            android:name=".ComposeActivity"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".DetailedTweetActivity"></activity>
     </application>
 
 </manifest>

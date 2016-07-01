@@ -21,8 +21,8 @@ public class Tweet {
         return body;
     }
 
-    public long getUid() {
-        return uid;
+    public long getId() {
+        return id;
     }
 
     public String getCreatedAt() {
@@ -43,18 +43,26 @@ public class Tweet {
 
     public int getFavoriteCount() { return favoriteCount; }
 
+    public boolean isRetweeted() { return retweeted; }
+
+    public void setFavorited() {favorited = !favorited; }
+
+    public void setRetweeted() { retweeted = !retweeted; }
+
     /**
      *
 
      */
     private String body;
-    private long uid;
+    private long id;
     private User user;
     private String createdAt;
     private String relativeTimestamp;
     private boolean favorited;
     private int retweetCount;
     private int favoriteCount;
+    private boolean retweeted;
+
 
 
     // Deserialize JSON
@@ -62,13 +70,14 @@ public class Tweet {
         Tweet tweet = new Tweet();
         try {
             tweet.body = jsonObject.getString("text");
-            tweet.uid = jsonObject.getLong("id");
+            tweet.id = jsonObject.getLong("id");
             tweet.createdAt = jsonObject.getString("created_at");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
             tweet.relativeTimestamp = tweet.getRelativeTimeAgo(tweet.getCreatedAt());
             tweet.favorited = jsonObject.getBoolean("favorited");
             tweet.retweetCount = jsonObject.getInt("retweet_count");
             tweet.favoriteCount = jsonObject.getInt("favorite_count");
+            tweet.retweeted = jsonObject.getBoolean("retweeted");
         } catch (JSONException e) {
             e.printStackTrace();
         }

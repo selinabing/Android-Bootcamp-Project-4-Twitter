@@ -110,7 +110,6 @@ public class ComposeActivity extends AppCompatActivity {
         });
     }
 
-
     public void onCancel(View view) {
         finish();
     }

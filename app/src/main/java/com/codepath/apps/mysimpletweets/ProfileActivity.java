@@ -1,8 +1,12 @@
 package com.codepath.apps.mysimpletweets;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,9 +44,13 @@ public class ProfileActivity extends AppCompatActivity {
         client.getUserInfo(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //user = User.fromJSON(response);
                 user = (User) Parcels.unwrap(getIntent().getParcelableExtra("user"));
-                getSupportActionBar().setTitle("@"+user.getScreenName());
+                if(user == null) {
+                    user = User.fromJSON(response);
+                }
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setTitle("@"+user.getScreenName());
+                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#006EEE")));
                 populateProfileHeader(user);
             }
         });
@@ -53,6 +61,11 @@ public class ProfileActivity extends AppCompatActivity {
             ft.replace(R.id.flContainer, userTimelineFragment);
             ft.commit();
         }
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
     }
 
     private void populateProfileHeader(User user) {
@@ -62,4 +75,12 @@ public class ProfileActivity extends AppCompatActivity {
         tvFollowing.setText(user.getFollowingsCount() + " Following");
         Picasso.with(this).load(user.getProfileImageUrl()).into(ivProfileImage);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+            finish();
+        return super.onOptionsItemSelected(item);
+    }
+
 }
