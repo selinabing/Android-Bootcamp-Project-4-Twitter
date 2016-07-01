@@ -32,7 +32,7 @@ public class DetailedTweetActivity extends AppCompatActivity {
     @BindView(R.id.tvNickname)
     TextView tvNickname;
     @BindView(R.id.tvBody)
-    TextView tvBody;
+    LinkifiedTextView tvBody;
     @BindView(R.id.tvUsername) TextView tvUsername;
     @BindView(R.id.tvRelativeTime) TextView tvRelativeTime;
     @BindView(R.id.tvNumLikes) TextView tvNumLikes;
@@ -40,6 +40,8 @@ public class DetailedTweetActivity extends AppCompatActivity {
     @BindView(R.id.ivHeartIcon) ImageView ivHeartIcon;
     @BindView(R.id.ivRetweetIcon) ImageView ivRetweetIcon;
     @BindView(R.id.ivReplyIcon) ImageView ivReplyIcon;
+    @BindView(R.id.ivMediaImg) ImageView ivMediaImg;
+
 
     TwitterClient client = TwitterApplication.getRestClient();
     private final int REQUEST_CODE_COMPOSE = 50;
@@ -100,6 +102,12 @@ public class DetailedTweetActivity extends AppCompatActivity {
             Picasso.with(this).load(R.drawable.ic_retweet_green).into(ivRetweetIcon);
         } else {
             Picasso.with(this).load(R.drawable.ic_retweet).into(ivRetweetIcon);
+        }
+
+        ivMediaImg.setImageResource(0);
+        String picUrl = tweet.getMediaImgUrl();
+        if (picUrl != null) {
+            Picasso.with(this).load(picUrl).into(ivMediaImg);
         }
 
         final User user = tweet.getUser();

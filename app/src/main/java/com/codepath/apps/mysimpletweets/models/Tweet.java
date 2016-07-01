@@ -45,6 +45,8 @@ public class Tweet {
 
     public boolean isRetweeted() { return retweeted; }
 
+    public String getMediaImgUrl() { return mediaImgUrl; }
+
     public void setFavorited() {favorited = !favorited; }
 
     public void setRetweeted() { retweeted = !retweeted; }
@@ -62,6 +64,7 @@ public class Tweet {
     private int retweetCount;
     private int favoriteCount;
     private boolean retweeted;
+    private String mediaImgUrl;
 
 
 
@@ -78,6 +81,19 @@ public class Tweet {
             tweet.retweetCount = jsonObject.getInt("retweet_count");
             tweet.favoriteCount = jsonObject.getInt("favorite_count");
             tweet.retweeted = jsonObject.getBoolean("retweeted");
+            try {
+                tweet.mediaImgUrl = jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getString("media_url");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            try {
+                int mediaUrlRangeLeft = (Integer)jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getJSONArray("indices").get(0);
+                int mediaUrlRangeRight = (Integer)jsonObject.getJSONObject("entities").getJSONArray("media").getJSONObject(0).getJSONArray("indices").get(1);
+                //tweet.body = tweet.body.substring(0,mediaUrlRangeLeft) + tweet.body.substring(mediaUrlRangeRight,tweet.body.length());
+                tweet.body = tweet.body.substring(0,mediaUrlRangeLeft);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

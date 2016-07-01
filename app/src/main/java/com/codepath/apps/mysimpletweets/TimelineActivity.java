@@ -52,7 +52,7 @@ public class TimelineActivity extends AppCompatActivity {
         tabStrip.setTabBackground(Color.parseColor("#006EEE"));
         tabStrip.setIndicatorColor(Color.parseColor("#006EEE"));
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(" Home");
+        actionBar.setTitle("  Home");
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_twitter_bird);
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#006EEE")));
@@ -126,8 +126,6 @@ public class TimelineActivity extends AppCompatActivity {
             else
                 return new MentionsTimelineFragment();
         }
-
-
 
         @Override
         public int getCount() {

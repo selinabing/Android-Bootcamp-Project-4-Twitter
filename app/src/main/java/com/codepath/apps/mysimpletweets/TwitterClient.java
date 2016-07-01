@@ -1,7 +1,6 @@
 package com.codepath.apps.mysimpletweets;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -106,13 +105,11 @@ public class TwitterClient extends OAuthBaseClient {
 
 	public void postRetweet(long id, AsyncHttpResponseHandler handler) {
 		String apiUrl = getApiUrl(String.format("statuses/retweet/%s.json",Long.toString(id)));
-		Log.d("DEBUG","unretweet"+String.format("statuses/retweet/%s.json",Long.toString(id)));
 		getClient().post(apiUrl, null, handler);
 	}
 
 	public void postUnRetweet(long id, AsyncHttpResponseHandler handler) {
 		String apiUrl = getApiUrl(String.format("statuses/unretweet/%s.json",Long.toString(id)));
-		Log.d("DEBUG","unretweet"+String.format("statuses/unretweet/%s.json",Long.toString(id)));
 		getClient().post(apiUrl, null, handler);
 	}
 

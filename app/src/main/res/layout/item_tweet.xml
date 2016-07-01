@@ -24,14 +24,25 @@
             android:layout_toEndOf="@+id/ivProfileImage"
             android:textStyle="bold" />
 
-        <TextView
+        <com.codepath.apps.mysimpletweets.LinkifiedTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="body"
             android:id="@+id/tvBody"
             android:layout_below="@+id/tvNickname"
             android:layout_toRightOf="@+id/ivProfileImage"
-            android:layout_toEndOf="@+id/ivProfileImage" />
+            android:layout_toEndOf="@+id/ivProfileImage"
+            android:autoLink="all"
+            android:focusable="false"
+            android:linksClickable="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ivMediaImg"
+            android:layout_below="@id/tvBody"
+            android:layout_toRightOf="@id/ivProfileImage"
+            android:layout_margin="-10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +70,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvBody"
+        android:layout_below="@id/ivMediaImg"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/ivProfileImage"
@@ -69,7 +80,7 @@
             android:layout_height="20dp"
             android:id="@+id/ivReplyIcon"
             android:src="@drawable/ic_reply"
-            android:layout_marginRight="48dp"/>
+            android:layout_marginRight="42dp"/>
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -83,7 +94,7 @@
             android:textColor="@color/darkGray"
             android:text="5"
             android:layout_marginTop="1dp"
-            android:layout_marginRight="38dp" />
+            android:layout_marginRight="32dp" />
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -97,7 +108,7 @@
             android:textColor="@color/darkGray"
             android:text="3"
             android:layout_marginTop="1dp"
-            android:layout_marginRight="38dp" />
+            android:layout_marginRight="32dp" />
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"

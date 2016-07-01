@@ -38,7 +38,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         ImageView ivProfileImage;
         @BindView(R.id.tvNickname) TextView tvNickname;
         @BindView(R.id.tvBody)
-        TextView tvBody;
+        LinkifiedTextView tvBody;
         @BindView(R.id.tvUsername) TextView tvUsername;
         @BindView(R.id.tvRelativeTime) TextView tvRelativeTime;
         @BindView(R.id.tvNumLikes) TextView tvNumLikes;
@@ -46,6 +46,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         @BindView(R.id.ivHeartIcon) ImageView ivHeartIcon;
         @BindView(R.id.ivRetweetIcon) ImageView ivRetweetIcon;
         @BindView(R.id.ivReplyIcon) ImageView ivReplyIcon;
+        @BindView(R.id.ivMediaImg) ImageView ivMediaImg;
 
         public ViewHolder(View itemView) {
             ButterKnife.bind(this,itemView);
@@ -92,13 +93,20 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
             viewHolder.tvNumLikes.setTextColor(Color.RED);
             Picasso.with(getContext()).load(R.drawable.ic_heart_red).into(viewHolder.ivHeartIcon);
         } else {
+            viewHolder.tvNumLikes.setTextColor(Color.parseColor("#66757f"));
             Picasso.with(getContext()).load(R.drawable.ic_heart_gray).into(viewHolder.ivHeartIcon);
         }
         if(tweet.isRetweeted()) {
             viewHolder.tvNumTweets.setTextColor(Color.parseColor("#2BBA30"));
             Picasso.with(getContext()).load(R.drawable.ic_retweet_green).into(viewHolder.ivRetweetIcon);
         } else {
+            viewHolder.tvNumTweets.setTextColor(Color.parseColor("#66757f"));
             Picasso.with(getContext()).load(R.drawable.ic_retweet).into(viewHolder.ivRetweetIcon);
+        }
+        viewHolder.ivMediaImg.setImageResource(0);
+        String picUrl = tweet.getMediaImgUrl();
+        if (picUrl != null) {
+            Picasso.with(getContext()).load(picUrl).into(viewHolder.ivMediaImg);
         }
 
         final User user = tweet.getUser();
