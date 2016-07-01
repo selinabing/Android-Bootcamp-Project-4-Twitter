@@ -144,6 +144,8 @@ public class TimelineActivity extends AppCompatActivity {
 
     public void onCompose(View view) {
         Intent i = new Intent (TimelineActivity.this, ComposeActivity.class);
+        i.putExtra("username","");
+        i.putExtra("status_id",-15251);
         startActivityForResult(i, REQUEST_CODE_COMPOSE);
     }
 

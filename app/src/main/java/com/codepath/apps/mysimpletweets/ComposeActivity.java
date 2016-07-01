@@ -39,20 +39,28 @@ public class ComposeActivity extends AppCompatActivity {
     TextView tvCharacterCount;
     TwitterClient client;
     User user;
+    long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
+
         ButterKnife.bind(this);
         getSupportActionBar().hide();
         //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        final String pretext_username = getIntent().getStringExtra("username");
+        id = getIntent().getLongExtra("status_id",-15251);
 
         client = TwitterApplication.getRestClient();
         client.getUserInfo(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d("DEBUG","compose activity on success");
+                etComposeTweetBody.setText(pretext_username);
+                etComposeTweetBody.setSelection(etComposeTweetBody.getText().length());
+                tvCharacterCount.setText(Integer.toString(140 - etComposeTweetBody.getText().toString().length()));
                 user = User.fromJSON(response);
                 Picasso.with(getApplicationContext()).load(user.getProfileImageUrl()).into(ivProfileImageCompose);
             }
@@ -93,12 +101,10 @@ public class ComposeActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
-
     public void onTweet(View view) {
-        client.postTweet(etComposeTweetBody.getText().toString(), new JsonHttpResponseHandler() {
+        client.postTweet(etComposeTweetBody.getText().toString(), id, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Tweet tweet = Tweet.fromJSON(response);

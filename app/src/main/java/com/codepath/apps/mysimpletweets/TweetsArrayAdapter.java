@@ -45,6 +45,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         @BindView(R.id.tvNumTweets) TextView tvNumTweets;
         @BindView(R.id.ivHeartIcon) ImageView ivHeartIcon;
         @BindView(R.id.ivRetweetIcon) ImageView ivRetweetIcon;
+        @BindView(R.id.ivReplyIcon) ImageView ivReplyIcon;
 
         public ViewHolder(View itemView) {
             ButterKnife.bind(this,itemView);
@@ -207,6 +208,15 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
             }
         });
 
+        viewHolder.ivReplyIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(),ComposeActivity.class);
+                i.putExtra("username","@"+tweet.getUser().getScreenName()+" ");
+                i.putExtra("status_id",tweet.getId());
+                getContext().startActivity(i);
+            }
+        });
 
         return convertView;
     }
