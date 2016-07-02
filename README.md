@@ -55,7 +55,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Most of the problems I faced during this project is the introduction of fragments and separation of Activity and code. We used Activity to do some degree of logics code in previous assignments, and I got used to that. As for fragments, the separation of Activity and fragment also made me confused when I first started using fragments. I tried to get Toolbar from fragment, but since toolbar was in Activity's xml file, trying to get the toolbar from fragment causes null pointer exceptions.
 
 ## Open-source libraries used
 
