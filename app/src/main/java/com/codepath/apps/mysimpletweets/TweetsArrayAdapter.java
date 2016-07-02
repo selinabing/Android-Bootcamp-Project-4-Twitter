@@ -185,6 +185,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
                     client.postUnRetweet(tweet.getId(), new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            Picasso.with(getContext()).load(R.drawable.ic_retweet).into(viewHolder.ivRetweetIcon);
+                            viewHolder.tvNumTweets.setTextColor(Color.parseColor("#66757f"));
                             if(prevNumTweets <= 1) {
                                 viewHolder.tvNumTweets.setText("");
                             } else {
@@ -202,6 +204,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
                     client.postRetweet(tweet.getId(), new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            Picasso.with(getContext()).load(R.drawable.ic_retweet_green).into(viewHolder.ivRetweetIcon);
+                            viewHolder.tvNumTweets.setTextColor(Color.parseColor("#2BBA30"));
                             int currNumTweets = prevNumTweets + 1;
                             viewHolder.tvNumTweets.setText(""+currNumTweets);
                             tweet.setRetweeted();
@@ -225,6 +229,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
                 getContext().startActivity(i);
             }
         });
+
 
         return convertView;
     }

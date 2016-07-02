@@ -39,6 +39,7 @@ public class TweetsListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tweets_list, container, false);
         ButterKnife.bind(this,view);
         lvTweets.setAdapter(adapterTweets);
+
         lvTweets.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -48,6 +49,16 @@ public class TweetsListFragment extends Fragment {
                 getActivity().startActivity(i);
             }
         });
+
+        lvTweets.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Tweet tweet = (Tweet) lvTweets.getItemAtPosition(position);
+                adapterTweets.remove(tweet);
+                return true;
+            }
+        });
+
         return view;
     }
 
